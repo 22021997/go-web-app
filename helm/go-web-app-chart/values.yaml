@@ -1,4 +1,5 @@
-replicaCount: 1
+deployment :
+ replicaCount: 3
 
 image:
   repository: krana69/go-web-app
