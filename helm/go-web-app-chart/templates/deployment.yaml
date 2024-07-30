@@ -1,3 +1,4 @@
+{{- with .Values.deployment }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,7 +6,7 @@ metadata:
   labels:
     app: go-web-app
 spec:
-  replicas: {{.Values.replicaCount}} 
+  replicas: {{ .replicaCount}} 
   selector:
     matchLabels:
       app: go-web-app
@@ -16,6 +17,9 @@ spec:
     spec:
       containers:
       - name: go-web-app
-        image: krana69/go-web-app:{{.Values.image.tag}}
+        {{- with .image }}
+        image: krana69/go-web-app:{{ .tag}}
+        {{-  end }}
         ports:
         - containerPort: 8080
+{{- end }}
